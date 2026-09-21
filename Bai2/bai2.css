@@ -1,0 +1,27 @@
+.khung {
+    width: 80%;
+    margin: 30px auto;
+    padding: 30px;
+    background: linear-gradient(to right, #C9A227, #A8861B);
+    color: white;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.anh {
+    float: right;
+    border: 2px solid white;
+    margin: 0 0 15px 25px;
+}
+
+p {
+    color: white;
+    text-align: justify;
+}
+
+.xoa {
+    clear: both;
+}
