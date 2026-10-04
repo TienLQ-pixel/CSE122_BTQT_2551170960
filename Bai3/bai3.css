@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", serif;
+    background: white;
+    color: #222;
+}
+.khung{
+    width: 87%;
+    margin: 10px auto;
+    padding: 18px 10px;
+    background: linear-gradient(
+        135deg,
+        #7ec8e3,
+        #0a5c8a
+    );
+}
+.nd{
+    background: #f8fbfc;
+    padding: 12px 16px 15px;
+    border-radius: 6px;
+    overflow: hidden;
+    min-height: 240px;
+}
+h1{
+    margin: 0 0 8px;
+    text-align: center;
+    color: #0b3d5c;
+    font-size: 19px;
+    font-weight: bold;
+}
+h2{
+    padding: 9px 12px;
+    margin-bottom: 10px;
+    background: #0b3d5c;
+    color: white;
+    border-radius: 3px;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.5;
+}
+.Anh{
+    width: 31%;
+    float: right;
+    margin: 3px 0 8px 15px;
+    border-radius: 4px;
+}
+p {
+    font-size: 13px;
+    line-height: 1.55;
+    text-align: justify;
+    margin: 7px 0;
+}
+p::first-letter {
+    color: #0b3d5c;
+    font-size: 31px;
+    font-weight: bold;
+    float: left;
+
+    line-height: 0.8;
+    padding-right: 3px;
+}
