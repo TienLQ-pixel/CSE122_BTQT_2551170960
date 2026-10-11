@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 40px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+.trang {
+    width: 620px;
+    margin: 0 auto;
+}
+
+.tieu-de-trang {
+    font-size: 18px;
+    color: #C8102E;
+    margin: 10px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #C8102E;
+}
+
+.khung {
+    width: 570px;
+    margin: 0 auto;
+    padding: 18px 8px 12px;
+    background-color: #FFFFFF;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 10px 5px;
+    background-color: #C8102E;
+    color: white;
+    font-size: 10px;
+}
+
+h3 {
+    text-align: center;
+    margin: 0;
+    padding: 8px 5px;
+    background-color: #FBE3E8;
+    color: #C8102E;
+    font-size: 10px;
+}
+
+h4{
+    color:#C8102E;
+    font-size: 11px;
+    margin: 0 0 5px;
+    font-weight: bold;
+}
+
+.noi-dung {
+    display: flex;
+    min-height: 270px;
+    padding: 0 10px;
+}
+
+.cot-trai,
+.cot-phai {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.cot-trai {
+    border-right: 1px solid #DDDDDD;
+}
+
+.cot-phai {
+    border-left: none;
+}
+
+.khoang-trong {
+    min-height: 140px;
+}
+
+.thong-tin h4::before,
+.chu-thich h4::before {
+    content: "□ ";
+}
+
+p {
+    font-size: 10px;
+    line-height: 1.5;
+    margin: 0 0 6px;
+    text-align: justify;
+}
+
+.anh-san-pham {
+    float: right;
+    width: 100px;
+    height: auto;
+    margin: 0 0 8px 8px;
+    border: 1px solid #DDDDDD;
+}
