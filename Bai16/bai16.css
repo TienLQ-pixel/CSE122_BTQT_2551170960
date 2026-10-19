@@ -1,0 +1,148 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 16px;
+    font-family: Arial, sans-serif;
+    background: #f5f3ff;
+    color: #333;
+}
+
+.todo-app {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.todo-header {
+    padding: 22px 24px;
+    background: #6d28d9;
+    color: #ffffff;
+}
+
+.todo-header h1 {
+    margin: 0 0 8px;
+    font-size: 25px;
+}
+
+.todo-header p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.todo-input {
+    display: flex;
+    gap: 10px;
+    padding: 20px 24px;
+}
+
+.todo-input input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 12px;
+    border: 1px solid #a78bfa;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+.todo-input input:focus {
+    border-color: #6d28d9;
+}
+
+.todo-input button {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #6d28d9;
+    color: #ffffff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.todo-input button:hover {
+    background: #5b21b6;
+}
+
+#taskList {
+    list-style: none;
+    margin: 0 24px;
+    padding: 0;
+    border-top: 1px dashed #ede9fe;
+}
+
+#taskList li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 4px;
+    border-bottom: 1px dashed #ede9fe;
+}
+
+#taskList li input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: #6d28d9;
+    cursor: pointer;
+}
+
+#taskList li span {
+    flex: 1;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+
+#taskList li.completed span {
+    color: #888888;
+    text-decoration: line-through;
+}
+
+.delete-button {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 4px;
+    background: #fde2e2;
+    color: #b91c1c;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: #fecaca;
+}
+
+#remaining {
+    margin: 0;
+    padding: 18px 24px 22px;
+    color: #6d28d9;
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .todo-header,
+    .todo-input {
+        padding: 16px;
+    }
+
+    .todo-header h1 {
+        font-size: 21px;
+    }
+
+    #taskList {
+        margin: 0 16px;
+    }
+
+    #remaining {
+        padding: 16px;
+    }
+}

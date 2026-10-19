@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 12 - In lịch</title>
+    <link rel="stylesheet" href="bai12.css">
+</head>
+<body>
+    <main class="container">
+        <section class="form-box">
+            <h1>IN LỊCH</h1>
+
+            <form id="dateForm">
+                <div class="inputs">
+                    <div>
+                        <label for="dayInput">Ngày</label>
+                        <input type="number" id="dayInput" min="1" max="31"
+                               value="18" required>
+                    </div>
+
+                    <div>
+                        <label for="monthInput">Tháng</label>
+                        <input type="number" id="monthInput" min="1" max="12"
+                               value="10" required>
+                    </div>
+
+                    <div>
+                        <label for="yearInput">Năm</label>
+                        <input type="number" id="yearInput" min="1" max="9999"
+                               value="2026" required>
+                    </div>
+                </div>
+
+                <button type="submit">In lịch</button>
+                <p id="error" role="alert"></p>
+            </form>
+        </section>
+
+        <section class="calendar" aria-live="polite">
+            <p id="year">Năm 2026</p>
+            <p id="month">Tháng 10</p>
+            <div id="day">17</div>
+            <p id="weekday">Chủ nhật</p>
+            <p id="greeting">Chúc buổi tối vui vẻ!</p>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById("dateForm");
+        const error = document.getElementById("error");
+
+        const weekdays = [
+            "Chủ nhật",
+            "Thứ hai",
+            "Thứ ba",
+            "Thứ tư",
+            "Thứ năm",
+            "Thứ sáu",
+            "Thứ bảy"
+        ];
+
+        function greetingByHour(hour) {
+            if (hour >= 5 && hour < 11) {
+                return "Chúc buổi sáng vui vẻ!";
+            }
+
+            if (hour >= 11 && hour < 13) {
+                return "Chúc buổi trưa vui vẻ!";
+            }
+
+            if (hour >= 13 && hour < 18) {
+                return "Chúc buổi chiều vui vẻ!";
+            }
+
+            return "Chúc buổi tối vui vẻ!";
+        }
+
+        function printCalendar(day, month, year) {
+            error.textContent = "";
+
+            const date = new Date(year, month - 1, day);
+
+            if (
+                date.getFullYear() !== year ||
+                date.getMonth() !== month - 1 ||
+                date.getDate() !== day
+            ) {
+                error.textContent =
+                    "Ngày, tháng hoặc năm không hợp lệ. Vui lòng nhập lại.";
+                return;
+            }
+
+            document.getElementById("year").textContent =
+                "Năm " + year;
+
+            document.getElementById("month").textContent =
+                "Tháng " + month;
+
+            document.getElementById("day").textContent = day;
+
+            document.getElementById("weekday").textContent =
+                weekdays[date.getDay()];
+
+            document.getElementById("greeting").textContent =
+                greetingByHour(new Date().getHours());
+        }
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const day = Number(
+                document.getElementById("dayInput").value
+            );
+
+            const month = Number(
+                document.getElementById("monthInput").value
+            );
+
+            const year = Number(
+                document.getElementById("yearInput").value
+            );
+
+            printCalendar(day, month, year);
+        });
+
+        printCalendar(18, 10, 2026);
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 15 - Máy tính đơn giản</title>
+    <link rel="stylesheet" href="bai15.css">
+</head>
+<body>
+    <main class="calculator">
+        <h1>Máy tính</h1>
+
+        <section class="screen">
+            <div id="expression">0</div>
+            <div id="result">0</div>
+        </section>
+
+        <section class="keys">
+            <button class="clear" data-action="clear">C</button>
+            <button data-action="percent">%</button>
+            <button data-action="backspace">⌫</button>
+            <button class="operator" data-value="/">÷</button>
+
+            <button data-value="7">7</button>
+            <button data-value="8">8</button>
+            <button data-value="9">9</button>
+            <button class="operator" data-value="*">×</button>
+
+            <button data-value="4">4</button>
+            <button data-value="5">5</button>
+            <button data-value="6">6</button>
+            <button class="operator" data-value="-">−</button>
+
+            <button data-value="1">1</button>
+            <button data-value="2">2</button>
+            <button data-value="3">3</button>
+            <button class="operator" data-value="+">+</button>
+
+            <button data-value="0">0</button>
+            <button data-value=".">.</button>
+            <button class="equal" data-action="calculate">=</button>
+            <button class="operator" data-action="sign">±</button>
+        </section>
+    </main>
+
+    <script>
+        const expressionDisplay = document.getElementById("expression");
+        const resultDisplay = document.getElementById("result");
+        const keys = document.querySelector(".keys");
+
+        let expression = "";
+        let justCalculated = false;
+
+        function updateDisplay() {
+            expressionDisplay.textContent = expression || "0";
+        }
+
+        function calculate() {
+            if (!expression) return;
+
+            if (!/^[0-9+\-*/%.()\s]+$/.test(expression)) {
+                resultDisplay.textContent = "Lỗi";
+                return;
+            }
+
+            try {
+                const normalized = expression.replace(/%/g, "/100");
+                const result = Function(
+                    '"use strict"; return (' + normalized + ')'
+                )();
+
+                if (!Number.isFinite(result)) {
+                    resultDisplay.textContent = "Không hợp lệ";
+                    return;
+                }
+
+                resultDisplay.textContent =
+                    String(Number(result.toFixed(10)));
+
+                expression = String(Number(result.toFixed(10)));
+                justCalculated = true;
+                updateDisplay();
+            } catch {
+                resultDisplay.textContent = "Lỗi phép tính";
+            }
+        }
+
+        keys.addEventListener("click", function(event) {
+            const button = event.target.closest("button");
+            if (!button) return;
+
+            const value = button.dataset.value;
+            const action = button.dataset.action;
+
+            if (action === "clear") {
+                expression = "";
+                resultDisplay.textContent = "0";
+                justCalculated = false;
+                updateDisplay();
+                return;
+            }
+
+            if (action === "backspace") {
+                expression = expression.slice(0, -1);
+                updateDisplay();
+                return;
+            }
+
+            if (action === "percent") {
+                expression += "%";
+                justCalculated = false;
+                updateDisplay();
+                return;
+            }
+
+            if (action === "calculate") {
+                calculate();
+                return;
+            }
+
+            if (action === "sign") {
+                if (expression && !isNaN(Number(expression))) {
+                    expression = String(-Number(expression));
+                    updateDisplay();
+                }
+                return;
+            }
+
+            if (value !== undefined) {
+                if (justCalculated && /[0-9.]/.test(value)) {
+                    expression = "";
+                }
+
+                expression += value;
+                justCalculated = false;
+                updateDisplay();
+            }
+        });
+    </script>
+</body>
+</html>

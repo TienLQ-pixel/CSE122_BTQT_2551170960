@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 13 - Đồng hồ số</title>
+    <link rel="stylesheet" href="bai13.css">
+</head>
+<body>
+    <main class="container">
+        <h1>ĐỒNG HỒ SỐ</h1>
+
+        <div class="clock" id="clock">
+            <div id="hours"></div>
+            <img src="haicham.gif" alt=":" class="colon">
+            <div id="minutes"></div>
+            <img src="haicham.gif" alt=":" class="colon">
+            <div id="seconds"></div>
+        </div>
+
+        <p id="greeting">Chào buổi sáng!</p>
+    </main>
+
+    <script>
+        function createDigits(value, elementId) {
+            const container = document.getElementById(elementId);
+            const text = String(value).padStart(2, "0");
+            container.innerHTML = "";
+
+            for (const digit of text) {
+                const img = document.createElement("img");
+                img.src = "0" + digit + ".gif";
+                img.alt = digit;
+                img.className = "digit";
+                container.appendChild(img);
+            }
+        }
+
+        function updateClock() {
+            const now = new Date();
+
+            createDigits(now.getHours(), "hours");
+            createDigits(now.getMinutes(), "minutes");
+            createDigits(now.getSeconds(), "seconds");
+
+            const hour = now.getHours();
+            let greeting;
+
+            if (hour >= 5 && hour < 11) {
+                greeting = "Chúc buổi sáng tốt lành!";
+            } else if (hour >= 11 && hour < 13) {
+                greeting = "Chúc buổi trưa vui vẻ!";
+            } else if (hour >= 13 && hour < 18) {
+                greeting = "Chúc buổi chiều vui vẻ!";
+            } else {
+                greeting = "Chúc buổi tối vui vẻ!";
+            }
+
+            document.getElementById("greeting").textContent = greeting;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>

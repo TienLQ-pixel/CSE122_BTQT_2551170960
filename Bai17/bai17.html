@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 17 - Kiểm tra biểu mẫu</title>
+    <link rel="stylesheet" href="bai17.css">
+</head>
+<body>
+    <main class="register">
+        <h1>Đăng ký tài khoản</h1>
+        <p class="description">Dữ liệu được kiểm tra bằng JavaScript trước khi gửi.</p>
+
+        <form id="registerForm" novalidate>
+            <div class="field">
+                <label for="fullname">Họ và tên</label>
+                <input type="text" id="fullname" placeholder="Nhập họ tên">
+                <small class="error"></small>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="name@example.com">
+                <small class="error"></small>
+            </div>
+
+            <div class="field">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" placeholder="Ít nhất 6 ký tự">
+                <small class="error"></small>
+            </div>
+
+            <div class="field">
+                <label for="confirmPassword">Xác nhận mật khẩu</label>
+                <input type="password" id="confirmPassword"
+                       placeholder="Nhập lại mật khẩu">
+                <small class="error"></small>
+            </div>
+
+            <button type="submit">Đăng ký</button>
+            <p id="success" role="status"></p>
+        </form>
+    </main>
+
+    <script>
+        const form = document.getElementById("registerForm");
+        const success = document.getElementById("success");
+
+        const fields = {
+            fullname: document.getElementById("fullname"),
+            email: document.getElementById("email"),
+            password: document.getElementById("password"),
+            confirmPassword: document.getElementById("confirmPassword")
+        };
+
+        function showError(input, message) {
+            const field = input.closest(".field");
+            const error = field.querySelector(".error");
+
+            input.classList.remove("valid");
+            input.classList.add("invalid");
+            error.textContent = message;
+        }
+
+        function showValid(input) {
+            const field = input.closest(".field");
+            const error = field.querySelector(".error");
+
+            input.classList.remove("invalid");
+            input.classList.add("valid");
+            error.textContent = "";
+        }
+
+        function validateField(input) {
+            const value = input.value.trim();
+
+            if (input.id === "fullname") {
+                if (value === "") {
+                    showError(input, "Vui lòng nhập họ và tên.");
+                    return false;
+                }
+            }
+
+            if (input.id === "email") {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailPattern.test(value)) {
+                    showError(input, "Email không đúng định dạng.");
+                    return false;
+                }
+            }
+
+            if (input.id === "password") {
+                if (input.value.length < 6) {
+                    showError(input, "Mật khẩu phải có ít nhất 6 ký tự.");
+                    return false;
+                }
+            }
+
+            if (input.id === "confirmPassword") {
+                if (input.value === "") {
+                    showError(input, "Vui lòng xác nhận mật khẩu.");
+                    return false;
+                }
+
+                if (input.value !== fields.password.value) {
+                    showError(input, "Mật khẩu xác nhận không khớp.");
+                    return false;
+                }
+            }
+
+            showValid(input);
+            return true;
+        }
+
+        Object.values(fields).forEach(function(input) {
+            input.addEventListener("input", function() {
+                success.textContent = "";
+                validateField(input);
+
+                if (input.id === "password" &&
+                    fields.confirmPassword.value !== "") {
+                    validateField(fields.confirmPassword);
+                }
+            });
+        });
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            success.textContent = "";
+
+            const results = Object.values(fields).map(validateField);
+            const allValid = results.every(Boolean);
+
+            if (allValid) {
+                success.textContent =
+                    "✓ Thông tin hợp lệ! Đây là biểu mẫu minh họa, chưa gửi dữ liệu lên máy chủ.";
+            }
+        });
+    </script>
+</body>
+</html>
