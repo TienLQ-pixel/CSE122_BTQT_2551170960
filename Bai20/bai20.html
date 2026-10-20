@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 20 - Hiệu ứng ảnh CSS Filter</title>
+    <link rel="stylesheet" href="bai20.css">
+</head>
+<body>
+    <main class="container">
+        <h1>CSS IMAGE EFFECTS</h1>
+
+        <section class="photo-card">
+            <div class="photo-area">
+                <img id="rose"
+                     src="hoahong.gif"
+                     alt="Bó hoa hồng">
+            </div>
+
+            <p class="special">Special For You</p>
+        </section>
+
+        <p class="instruction">Chọn một hiệu ứng để áp dụng cho ảnh</p>
+
+        <section class="controls" id="controls">
+            <button type="button" data-effect="gray">Gray</button>
+            <button type="button" data-effect="xray">Xray</button>
+            <button type="button" data-effect="invert">Invert</button>
+            <button type="button" data-effect="flipH">FlipH</button>
+            <button type="button" data-effect="flipV">FlipV</button>
+            <button type="button" data-effect="glow">Glow</button>
+            <button type="button" data-effect="shadow">Shadow</button>
+            <button type="button" data-effect="boldShadow">Bold Shadow</button>
+            <button type="button" data-effect="dropShadow">DropShadow</button>
+            <button type="button" data-effect="blur">Blur</button>
+            <button type="button" data-effect="wave">Wave</button>
+            <button type="button" data-effect="mask">Mask</button>
+            <button type="button" data-effect="alpha">Alpha</button>
+        </section>
+
+        <button type="button" class="reset" id="reset">Khôi phục ảnh</button>
+    </main>
+
+    <script>
+        const rose = document.getElementById("rose");
+        const controls = document.getElementById("controls");
+        const reset = document.getElementById("reset");
+
+        const effects = {
+            gray: "grayscale(1)",
+            xray: "grayscale(1) invert(1)",
+            invert: "invert(1)",
+            flipH: "none",
+            flipV: "none",
+            glow: "brightness(1.15) saturate(1.3)",
+            shadow: "none",
+            boldShadow: "none",
+            dropShadow: "none",
+            blur: "blur(3px)",
+            wave: "none",
+            mask: "none",
+            alpha: "none"
+        };
+
+        function applyEffect(name) {
+            rose.style.filter = effects[name] || "none";
+            rose.style.transform = "none";
+            rose.style.opacity = "1";
+            rose.style.clipPath = "none";
+            rose.style.animation = "none";
+            rose.style.boxShadow = "none";
+
+            if (name === "flipH") {
+                rose.style.transform = "scaleX(-1)";
+            } else if (name === "flipV") {
+                rose.style.transform = "scaleY(-1)";
+            } else if (name === "shadow") {
+                rose.style.boxShadow = "5px 5px 10px #000";
+            } else if (name === "boldShadow") {
+                rose.style.boxShadow = "10px 10px 0 #000";
+            } else if (name === "dropShadow") {
+                rose.style.filter = "drop-shadow(8px 8px 8px #000)";
+            } else if (name === "wave") {
+                rose.style.animation = "wave 1.2s ease-in-out infinite";
+            } else if (name === "mask") {
+                rose.style.clipPath =
+                    "ellipse(45% 48% at 50% 50%)";
+            } else if (name === "alpha") {
+                rose.style.opacity = "0.4";
+            }
+
+            document.querySelectorAll("[data-effect]").forEach(function(button) {
+                button.classList.toggle(
+                    "active",
+                    button.dataset.effect === name
+                );
+            });
+        }
+
+        controls.addEventListener("click", function(event) {
+            const button = event.target.closest("button[data-effect]");
+            if (!button) return;
+
+            applyEffect(button.dataset.effect);
+        });
+
+        reset.addEventListener("click", function() {
+            rose.style.filter = "none";
+            rose.style.transform = "none";
+            rose.style.opacity = "1";
+            rose.style.clipPath = "none";
+            rose.style.animation = "none";
+            rose.style.boxShadow = "none";
+
+            document.querySelectorAll("[data-effect]").forEach(function(button) {
+                button.classList.remove("active");
+            });
+        });
+    </script>
+</body>
+</html>

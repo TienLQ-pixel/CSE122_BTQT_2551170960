@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 21 - Bố cục trang 4 vùng</title>
+    <link rel="stylesheet" href="bai21.css">
+</head>
+<body>
+    <header class="banner">
+        <div class="logo-area">
+            <img src="LogoTT.gif" alt="logo">
+        </div>
+        <h1>Hệ thống bài tập Lập trình Web</h1>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar-menu">
+            <ul>
+                <li class="active">Ngôn ngữ HTML</li>
+                <li>Ngôn ngữ JavaScript</li>
+                <li>Các đối tượng trong JavaScript</li>
+                <li>CSS và bố cục hiện đại</li>
+            </ul>
+        </nav>
+
+        <main class="content-area">
+            <h2>Bài tập HTML cơ bản</h2>
+            <div class="sub-menu-box">
+                - Dảo chuỗi - Phân tích chuỗi - Tìm và thay thế
+            </div>
+            <div class="text-content">
+                <h3>Thiết kế trang web có nội dung như sau:</h3>
+                <p>Trung Tâm Tin học – ĐH KHTN</p>
+                <p>Chào mừng các bạn đến với ngôn ngữ HTML</p>
+            </div>
+        </main>
+
+        <aside class="ads-area">
+            <div class="ad-banner">
+                <img src="Qcao01.gif" rel="qc1">
+            </div>
+            <div class="ad-banner">
+                <img src="Qcao02.gif" rel="qc2">
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const menuItems = document.querySelectorAll('.sidebar-menu li');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
